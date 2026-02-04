@@ -1,0 +1,15 @@
+version '3.8'
+
+sevices:
+  clinic-app:
+    build: .
+    container_name: clinic_tablo_container
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./database_data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:///./data/sql_app.db
+    restart: always

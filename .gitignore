@@ -1,0 +1,7 @@
+/__pycache__
+/venv
+clinic.db
+tablo.zip
+tk_tablo.py
+seed.py
+sql_app.db
