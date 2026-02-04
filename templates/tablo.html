@@ -275,7 +275,7 @@ function startAutoScroll() {
         }
 
         async function loadData() {
-            const response = await fetch('http://127.0.0.1:8000/api/get-display');
+            const response = await fetch('/api/get-display');
             const data = await response.json();
             const grid = document.getElementById('main-grid');
             grid.innerHTML = data.rooms.map(room => createCard(room)).join('');
