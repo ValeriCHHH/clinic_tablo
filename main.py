@@ -231,7 +231,7 @@ async def update_room_details(room_id: int, data: RoomUpdate, db: Session = Depe
 @app.patch("/api/update-ticker")
 async def update_ticker(data: TickerUpdate, db: Session = Depends(get_db), user: str = Depends(get_current_username)):
     ticker = db.query(models.Content).filter(models.Content.type == "ticker").first()
-    if not ticket:
+    if not ticker:
         ticker = models.Content(type="ticker", text=data.text)
         db.add(ticker)
     else:
