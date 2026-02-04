@@ -245,7 +245,7 @@ function startAutoScroll() {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
         }, 1000);
         function createCard(room) {
-            let satusClass = 'status-break';
+            let statusClass = 'status-break';
             let statusTitle = 'Перерыв';
 
             if (room.status === 'active') {
