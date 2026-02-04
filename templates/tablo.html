@@ -227,7 +227,7 @@ function startAutoScroll() {
         }
 
         currentPage++;
-        
+
         if (currentPage >= totalPages) {
             currentPage = 0;
         }
@@ -281,11 +281,12 @@ function startAutoScroll() {
             grid.innerHTML = data.rooms.map(room => createCard(room)).join('');
             const ticker = document.getElementById('ticker-text');
             if (ticker) ticker.innerText = data.ticker;
-            
+
             startAutoScroll();
         }
 
-        const socket = new WebSocket(`ws://${window.location.host}/ws/tablo`);
+        const protocol = window.location.protocol == 'https:' ? 'wss:' : 'ws:';
+        const socket = new WebSocket(`${protocol}//${window.location.host}/ws/tablo`);
         socket.onmessage = async function(event) {
             const msg = JSON.parse(event.data);
             if (msg.type === 'STATUS_CHANGED') {
@@ -300,7 +301,7 @@ function startAutoScroll() {
                     }, 1500);
 
                 }
-            
+
             }
             else if (msg.type === 'TICKER_CHANGED') {
         const ticker = document.getElementById('ticker'); // Или ваш класс строки

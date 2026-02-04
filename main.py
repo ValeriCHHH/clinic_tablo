@@ -2,6 +2,7 @@ import os
 import json
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 import secrets
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -24,6 +25,15 @@ templates = Jinja2Templates(directory="templates")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
