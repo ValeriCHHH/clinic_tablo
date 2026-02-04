@@ -1,6 +1,6 @@
 version '3.8'
 
-sevices:
+services:
   clinic-app:
     build: .
     container_name: clinic_tablo_container
