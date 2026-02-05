@@ -184,7 +184,7 @@
             gap: 25px;
             padding: 25px;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            height: auto;
+
         }
     </style>
 </head>
@@ -212,15 +212,20 @@ function startAutoScroll() {
     scrollInterval = setInterval(() => {
         const container = document.getElementById('main-grid');
         const viewport = document.querySelector('.viewport');
+        const header = document.querySelector('header'); // Или ваш класс шапки
 
         if (!container || !viewport) return;
 
-        const viewHeight = viewport.clientHeight; // Видимая часть
-        const totalHeight = container.scrollHeight; // Полная высота ленты
-        const totalPages = Math.ceil(totalHeight / viewHeight);
+        // Высота шапки (если она фиксирована сверху)
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        // Доступная высота для контента (вся высота минус шапка)
+        const effectiveViewHeight = viewport.clientHeight - headerHeight; 
+        
+        const totalHeight = container.scrollHeight;
+        const totalPages = Math.ceil(totalHeight / effectiveViewHeight);
 
-        // Отладка: нажми F12 в браузере и посмотри эти цифры
-        console.log(`Страница: ${currentPage + 1}/${totalPages}, Высота: ${totalHeight}`);
+        console.log(`Страница: ${currentPage + 1}/${totalPages}, Смещение: ${currentPage * effectiveViewHeight}`);
 
         if (totalPages <= 1) {
             container.style.transform = 'translateY(0)';
@@ -234,11 +239,12 @@ function startAutoScroll() {
             currentPage = 0;
         }
 
-        // Смещение
-        const offset = currentPage * viewHeight;
+        // Теперь смещаем на "чистую" высоту экрана за вычетом шапки
+        const offset = currentPage * effectiveViewHeight;
         container.style.transform = `translateY(-${offset}px)`;
 
-    }, 10000); // 10 секунд
+    }, 10000);
+}
 }
 // Вызывай startAutoScroll() внутри функции loadData() после того, как карточки отрисованы
         setInterval(() => {
