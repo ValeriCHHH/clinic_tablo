@@ -131,9 +131,9 @@
             font-weight: normal;
         }
 
-        .status-active { background-color: #43ab35; color: white; !important; }
-        .status-break { background-color: #f2be4e; color: #2c3e50; !important; }
-        .status-vacation { background-color: #ad7be3; color: white; !important; }
+        .status-active { background-color: #43ab35; color: white; }
+        .status-break { background-color: #f2be4e; color: #2c3e50; }
+        .status-vacation { background-color: #ad7be3; color: white; }
 
         footer {
             height: 8vh;
@@ -245,7 +245,7 @@ function startAutoScroll() {
 
     }, 10000);
 }
-}
+
 // Вызывай startAutoScroll() внутри функции loadData() после того, как карточки отрисованы
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
